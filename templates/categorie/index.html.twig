@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+<h1>Catégories</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Création</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for categorie in categories %}
+        <tr>
+            <td>{{categorie.nom}}</td>
+            <td>{{ categorie.creation|date('d/m/Y') }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="2">Il n'y a aucune catégorie</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<h2>Ajouter une catégorie</h2>
+{{ form(ajout) }}
+{% endblock %}
