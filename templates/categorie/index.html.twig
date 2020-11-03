@@ -15,8 +15,17 @@
     <tbody>
     {% for categorie in categories %}
         <tr>
-            <td>{{categorie.nom}}</td>
+            <td>
+                <a href="{{ path('show', {'id': categorie.id}) }}">
+                    {{categorie.nom}}
+                </a>
+            </td>
             <td>{{ categorie.creation|date('d/m/Y') }}</td>
+            <td>
+                <a href="{{ path('delete', {'id':categorie.id}) }}">
+                    Supprimer
+                </a>
+            </td>
         </tr>
     {% else %}
         <tr>

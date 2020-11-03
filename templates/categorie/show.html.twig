@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{categorie.nom}}</h1>
+	<p>{{categorie.creation|date('d/m/Y')}}</p>
+
+	<h2>Modifier la catégorie</h2>
+	{{form(maj)}}
+{% endblock %}
