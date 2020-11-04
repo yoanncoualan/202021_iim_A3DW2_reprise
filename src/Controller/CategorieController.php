@@ -8,13 +8,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CategorieController extends AbstractController
 {
     /**
      * @Route("/categorie", name="categorie")
      */
-    public function index(Request $request): Response
+    public function index(Request $request, TranslatorInterface $trans): Response
     {
         $em = $this->getDoctrine()->getManager(); // accès à la bdd
 
@@ -27,15 +28,18 @@ class CategorieController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Catégorie ajoutée'
+                $trans->trans('categorie.ajoutee')
             );
         }
 
         $categories = $em->getRepository(Categorie::class)->findAll();
 
+        $categoriesParDate = $em->getRepository(Categorie::class)->findByDate('2020-11-03');
+
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
-            'ajout' => $form->createView()
+            'ajout' => $form->createView(),
+            'categoriesParDate' => $categoriesParDate
         ]);
     }
 

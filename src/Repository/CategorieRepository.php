@@ -47,4 +47,15 @@ class CategorieRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByDate($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.creation like :val')
+            ->setParameter('val', $value.'%')
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

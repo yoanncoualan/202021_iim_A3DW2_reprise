@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @UniqueEntity("titre")
  */
 class Article
 {
@@ -19,6 +23,7 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $titre;
 
@@ -34,8 +39,14 @@ class Article
 
     /**
      * @ORM\ManyToOne(targetEntity=Categorie::class, inversedBy="articles")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $categorie;
+
+    public function __construct()
+    {
+        $this->creation = new \Datetime();
+    }
 
     public function getId(): ?int
     {

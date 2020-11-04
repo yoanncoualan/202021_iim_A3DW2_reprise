@@ -6,4 +6,7 @@
 
 	<h2>Modifier la catégorie</h2>
 	{{form(maj)}}
+
+	<h3>Liste des articles</h3>
+	{% include 'article/liste.html.twig' with {'articles': categorie.articles} %}
 {% endblock %}

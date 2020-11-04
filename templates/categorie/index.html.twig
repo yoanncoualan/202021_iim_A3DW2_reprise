@@ -3,13 +3,16 @@
 {% block title %}Hello CategorieController!{% endblock %}
 
 {% block body %}
-<h1>Catégories</h1>
+<h1>{{ 'categorie.titre'|trans }}</h1>
+
+{{dump(categoriesParDate)}}
 
 <table border="1">
     <thead>
         <tr>
             <th>Nom</th>
             <th>Création</th>
+            <th>Articles</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +24,7 @@
                 </a>
             </td>
             <td>{{ categorie.creation|date('d/m/Y') }}</td>
+            <td>{{ categorie.articles|length }}</td>
             <td>
                 <a href="{{ path('delete', {'id':categorie.id}) }}">
                     Supprimer
